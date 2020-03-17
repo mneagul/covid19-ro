@@ -263,23 +263,27 @@
                 lr = regression.exponential(_trendline.pairs);
                 lr_it = regression.exponential(_ds_it)
                 aY_it = []
+                aY_ro = []
                 lrds = []
                 lrds_it = []
-                for (i=0; i<lr.points.length; i++) {
+                _label = []
+                for (i=4; i<lr.points.length; i++) {
                     lrds.push(lr.points[i][1]);
                     lrds_it.push(lr_it.points[i][1]);
                     aY_it.push(_ds_it[i][1]);
+                    aY_ro.push(_trendline.y[i])
+                    _label.push(i-3)
                 }
                 configDailyCases['data']['datasets'][0]['data'] = _datasets;
                 var ctxDailyCases = document.getElementById('canvasDailyCases').getContext('2d');
                 window.myLine = new Chart(ctxDailyCases, configDailyCases);
-                configTrendline['data']['labels'] = _trendline.x;
-                configTrendline['data']['datasets'][0]['data'] = _trendline.y;
+                configTrendline['data']['labels'] = _label;
+                configTrendline['data']['datasets'][0]['data'] = aY_ro;
                 configTrendline['data']['datasets'][1]['data'] = lrds;
-                configTrendline['data']['datasets'][1]['label'] = lr.string;
+                configTrendline['data']['datasets'][1]['label'] = lr.string + ' [RO]';
                 configTrendline['data']['datasets'][2]['data'] = aY_it;
                 configTrendline['data']['datasets'][3]['data'] = lrds_it;
-                configTrendline['data']['datasets'][3]['label'] = lr_it.string;
+                configTrendline['data']['datasets'][3]['label'] = lr_it.string + ' [IT]';
                 var ctxTrendline = document.getElementById('canvasTrendline').getContext('2d');
                 window.myLine = new Chart(ctxTrendline, configTrendline);
             }
@@ -446,7 +450,7 @@
 			data: {
 				labels: [],
 				datasets: [{
-					label: '',
+					label: 'cazuri [RO]',
 					backgroundColor: window.chartColors.blue,
 					borderColor: window.chartColors.blue,
 					data: [],
@@ -463,7 +467,7 @@
                     borderColor: window.chartColors.orange,
                 },
                 {
-					label: '',
+					label: 'cazuri [IT]',
 					backgroundColor: window.chartColors.yellow,
 					borderColor: window.chartColors.yellow,
 					data: [],
