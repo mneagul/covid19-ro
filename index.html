@@ -266,10 +266,11 @@
                 configDailyCases['data']['datasets'][0]['data'] = _datasets;
                 var ctxDailyCases = document.getElementById('canvasDailyCases').getContext('2d');
                 window.myLine = new Chart(ctxDailyCases, configDailyCases);
+                console.log(lr)
                 configTrendline['data']['labels'] = _trendline.x;
                 configTrendline['data']['datasets'][0]['data'] = _trendline.y;
                 configTrendline['data']['datasets'][1]['data'] = lrds;
-                configTrendline['data']['datasets'][1]['label'] = lr.string;
+                configTrendline['data']['datasets'][1]['label'] = lr.string + '  R^2=' + lr.r2;
                 var ctxTrendline = document.getElementById('canvasTrendline').getContext('2d');
                 window.myLine = new Chart(ctxTrendline, configTrendline);
             }
