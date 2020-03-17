@@ -248,7 +248,7 @@
             success: function(data) {
                 var _data = data.data.data;
                 _datasets = []
-                for (i=0; i<_data.length-1; i++) {
+                for (i=0; i<_data.length; i++) {
                     _datasets.push({x: _data[i]['day_case'],y: _data[i]['new_case_no']});
                 }
                 configDailyCases['data']['datasets'][0]['data'] = _datasets;
