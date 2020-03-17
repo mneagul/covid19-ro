@@ -252,11 +252,6 @@
                 _women = 0;
                 _men = 0;
                 _total = _data.length;
-                _silent75 = 0;
-                _babyboomers74_56 = 0;
-                _generationX55_40 = 0;
-                _millenials39_24 = 0;
-                _generationZ23_0 = 0;
                 
                 for (i=0; i<_data.length; i++) {
                     if (_data[i].properties.gender == 'Bărbat') {
@@ -298,6 +293,7 @@
                     configFreqByAge.data.datasets[0].data.push(_bai[k].count);
                     configFreqByAge.data.labels.push(_bai[k].label);
                 }
+
                 console.log(_bai);
                 var ctxDBS = document.getElementById('canvasDistributionBySex').getContext('2d');
                 window.myLine = new Chart(ctxDBS, configDistributionBySex);
@@ -570,7 +566,6 @@
 				}
 			}
 		};
-
 
     </script>
 </body>
