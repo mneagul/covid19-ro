@@ -264,7 +264,6 @@
                 for (i=0; i<lr.points.length; i++) {
                     lrds.push(lr.points[i][1]);
                 }
-                console.log(lr);
                 configDailyCases['data']['datasets'][0]['data'] = _datasets;
                 var ctxDailyCases = document.getElementById('canvasDailyCases').getContext('2d');
                 window.myLine = new Chart(ctxDailyCases, configDailyCases);
@@ -459,7 +458,7 @@
 				responsive: true,
 				title: {
 					display: true,
-                    text: 'Ziua fata de cazuri cumulative',
+                    text: 'Ziua față de cazuri cumulative',
                     fontSize: 18
 				},
 				tooltips: {
@@ -475,7 +474,7 @@
 						display: true,
 						scaleLabel: {
 							display: true,
-							labelString: 'Ziua (din momentul declansarii in Romania)'
+							labelString: 'Ziua (din momentul declanșării în România)'
 						}
 					}],
 					yAxes: [{
