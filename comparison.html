@@ -287,10 +287,10 @@
                 configTrendline['data']['labels'] = _trendline.x;
                 configTrendline['data']['datasets'][0]['data'] = _trendline.y;
                 configTrendline['data']['datasets'][1]['data'] = lrds;
-                configTrendline['data']['datasets'][1]['label'] = lr.string + ' R^2='+lr.r2+' [RO]';
+                configTrendline['data']['datasets'][1]['label'] = lr.string + ' R^2='+lr.r2+' [Romania]';
                 configTrendline['data']['datasets'][2]['data'] = aY_it;
                 configTrendline['data']['datasets'][3]['data'] = lrds_it;
-                configTrendline['data']['datasets'][3]['label'] = lr_it.string + '  R^2='+lr_it.r2+' [IT]';
+                configTrendline['data']['datasets'][3]['label'] = lr_it.string + '  R^2='+lr_it.r2+' [Italia]';
                 var ctxTrendline = document.getElementById('canvasTrendline').getContext('2d');
                 window.myLine = new Chart(ctxTrendline, configTrendline);
             }
