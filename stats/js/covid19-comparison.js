@@ -72,7 +72,7 @@ function getFromGeoSpatial() {
                         taY.push(target_value[k][1])
                     }
                     ds0 = {
-                        label: 'cazuri ['+target_countries[i]+']',
+                        label: 'cazuri, start:['+target_countries_start_date[i]+'] ['+target_countries[i]+']',
                         backgroundColor: window.chartColors[target_counterie_chart_color[i].split('/')[0]],
                         borderColor: window.chartColors[target_counterie_chart_color[i].split('/')[0]],
                         data: taY,
