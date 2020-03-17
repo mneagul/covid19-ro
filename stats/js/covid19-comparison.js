@@ -7,7 +7,7 @@ var db = {
     'dates': [],
     'countries': {}
 }
-console.log(window.location.search.substr(1));
+
 $.get({
     url: github_csv_data_url,
     success: function(data) {
@@ -59,11 +59,9 @@ function getFromGeoSpatial() {
                     sd = Date.parse(target_countries_start_date[i]);
                     swi = db.dates.indexOf(sd);
                     target_value = []
-                    console.log(d.total_cases[10])
                     for (k=swi; k<swi+_trendline.x.length; k++) {
                         target_value.push([k-swi+1, d.total_cases[k]]);
                     }
-                    console.log(target_value);
                     tlr = regression.exponential(target_value);
                     tlrds = []
                     taY = []
