@@ -226,6 +226,7 @@
             <canvas id="canvasDailyCases" style="display: block; height: 172px; width: 344px;" width="688" height="344" class="chartjs-render-monitor"></canvas>
             <canvas id="canvasDistributionBySex" style="display: block; height: 172px; width: 344px;" width="688" height="344" class="chartjs-render-monitor"></canvas>
             <canvas id="canvasFreqByGeneration" style="display: block; height: 172px; width: 344px;" width="688" height="344" class="chartjs-render-monitor"></canvas>
+            <canvas id="canvasFreqByAge" style="display: block; height: 172px; width: 344px;" width="688" height="344" class="chartjs-render-monitor"></canvas>
         </div>
     </div>
      
@@ -256,6 +257,7 @@
                 _generationX55_40 = 0;
                 _millenials39_24 = 0;
                 _generationZ23_0 = 0;
+                
                 for (i=0; i<_data.length; i++) {
                     if (_data[i].properties.gender == 'Bărbat') {
                         _men += 1;
@@ -263,35 +265,136 @@
                         _women += 1;
                     }
 
-                    if (_data[i].properties.age >= 75) {
-                        _silent75 += 1;
-                    } else if (_data[i].properties.age < 75 && _data[i].properties.age >= 56) {
-                        _babyboomers74_56 += 1;
-                    } else if (_data[i].properties.age < 56 && _data[i].properties.age >= 40) {
-                        _generationX55_40 += 1;
-                    } else if (_data[i].properties.age < 40 && _data[i].properties.age >= 24) {
-                        _millenials39_24 += 1;
-                    } else if (_data[i].properties.age < 23) {
-                        _generationZ23_0 += 1;
+                    for (var e in Object.keys(_bti)){
+                        var _k = Object.keys(_bti)[e];
+                        if (_data[i].properties.age != null) {
+                            if (_data[i].properties.age >= _bti[_k].intervals.min && _data[i].properties.age <= _bti[_k].intervals.max) {
+                                _bti[_k].count += 1;
+                            }
+                        }
+                    }
+                    for (var e in Object.keys(_bai)){
+                        var _k = Object.keys(_bai)[e];
+                        if (_data[i].properties.age != null) {
+                            if (_data[i].properties.age >= _bai[_k].intervals.min && _data[i].properties.age <= _bai[_k].intervals.max) {
+                                _bai[_k].count += 1;
+                            }
+                        }
                     }
                 }
                 configDistributionBySex.data.datasets[0].data = [
                     ((_women*100)/_total).toFixed(2), 
                     ((_men*100)/_total).toFixed(2)
                 ];
-                configFreqByGeneration.data.datasets[0].data = [
-                    ((_silent75*100)/_total).toFixed(2),
-                    ((_babyboomers74_56*100)/_total).toFixed(2),
-                    ((_generationX55_40*100)/_total).toFixed(2),
-                    ((_millenials39_24*100)/_total).toFixed(2),
-                    ((_generationZ23_0*100)/_total).toFixed(2)
-                ];
+                
+                for (var e in Object.keys(_bti)){
+                    var k = Object.keys(_bti)[e];
+                    configFreqByGeneration.data.datasets[0].data.push(_bti[k].count);
+                    configFreqByGeneration.data.labels.push(_bti[k].label);
+                }
+                
+                for (var e in Object.keys(_bai)){
+                    var k = Object.keys(_bai)[e];
+                    configFreqByAge.data.datasets[0].data.push(_bai[k].count);
+                    configFreqByAge.data.labels.push(_bai[k].label);
+                }
+                console.log(_bai);
                 var ctxDBS = document.getElementById('canvasDistributionBySex').getContext('2d');
                 window.myLine = new Chart(ctxDBS, configDistributionBySex);
                 var ctxFBG = document.getElementById('canvasFreqByGeneration').getContext('2d');
                 window.myLine = new Chart(ctxFBG, configFreqByGeneration);
+                var ctxFBA = document.getElementById('canvasFreqByAge').getContext('2d');
+                window.myLine = new Chart(ctxFBA, configFreqByAge);
             }
         });
+
+        // by type intervals
+        _bti = {
+            'silent': {
+                intervals: {
+                    'min': 74,
+                    'max': 150
+                },
+                count: 0,
+                label: 'The Silent Generation'
+            },
+            'babyboomers': {
+                intervals: {
+                    'min': 55,
+                    'max': 73,
+                },
+                count: 0,
+                label: 'Baby Boomers'
+            },
+            'generationx': {
+                intervals: {
+                    'min': 39,
+                    'max': 54,
+                },
+                count: 0,
+                label: 'Generation X'
+            },
+            'millennials': {
+                intervals: {
+                    'min': 23,
+                    'max': 38,
+                },
+                count: 0,
+                label: 'Millennials'
+            },
+            'generationz': {
+                intervals: {
+                    'min': 10,
+                    'max': 22,
+                },
+                count: 0,
+                label: 'Generation Z'
+            }
+        }
+
+        // by age intervals
+        _bai = {
+            'a0_14': {
+                intervals: {
+                    'min': 0,
+                    'max': 14
+                },
+                count: 0,
+                label: '0-14'
+            },
+            'a15_24': {
+                intervals: {
+                    'min': 15,
+                    'max': 24,
+                },
+                count: 0,
+                label: '15-24'
+            },
+            'a25_54': {
+                intervals: {
+                    'min': 25,
+                    'max': 54,
+                },
+                count: 0,
+                label: '25-54'
+            },
+            'a55_64': {
+                intervals: {
+                    'min': 55,
+                    'max': 64,
+                },
+                count: 0,
+                label: '55-64'
+            },
+            'a65': {
+                intervals: {
+                    'min': 65,
+                    'max': 150,
+                },
+                count: 0,
+                label: '64+'
+            }
+        }
 
         window.chartColors = {
             red: 'rgb(255, 99, 132)',
@@ -302,20 +405,22 @@
             purple: 'rgb(153, 102, 255)',
             grey: 'rgb(201, 203, 207)'
         };
+        
         var configFreqByGeneration = {
             type: 'outlabeledPie',
             data: {
-                labels: ['The Silent Generation', 'Baby Boomers', 'Generation X', 'Millennials', 'Generation Z'],
+                labels: [],
                 datasets: [{
                     backgroundColor: [window.chartColors.orange, window.chartColors.green, window.chartColors.yellow, window.chartColors.red, window.chartColors.blue ],
                     data: []
                 }]
             },
             options: {
+                zoomOutPercentage: 50,
                 repsonsive: true,
                 title: {
 					display: true,
-                    text: 'Frecventa dupa generatie (%)',
+                    text: 'Frecvența după generație',
                     fontSize: 18
                 },
                 legend: {
@@ -323,21 +428,21 @@
                 },
                 display: true,
 			    elements: {
-			    }
+			    },
+                plugins: {
+                    legend: false,
+                    outlabels: {
+                        text: '%l %p',
+                        color: 'white',
+                        stretch: 45,
+                        font: {
+                            resizable: true,
+                            minSize: 12,
+                            maxSize: 18
+                        }
+                    }
+                }
             },
-            plugins: {
-                legend: false,
-                outlabels: {
-                text: '%l %p',
-                color: 'white',
-                stretch: 45,
-                font: {
-                    resizable: true,
-                    minSize: 12,
-                    maxSize: 18
-                }
-                }
-            }
        }
 
        var configDistributionBySex = {
@@ -353,7 +458,7 @@
                 repsonsive: true,
                 title: {
 					display: true,
-                    text: 'Distributie dupa gen (%)',
+                    text: 'Distribuție după gen',
                     fontSize: 18
                 },
                 legend: {
@@ -364,6 +469,54 @@
 			    }
             }
        }
+       
+       var configFreqByAge = {
+			type: 'line',
+			data: {
+				labels: [],
+				datasets: [{
+                    label: 'Grupe de vârstă',
+					backgroundColor: window.chartColors.blue,
+					borderColor: window.chartColors.blue,
+					data: [],
+					fill: false,
+                    borderColor: window.chartColors.blue
+				}]
+			},
+			options: {
+				responsive: true,
+				title: {
+					display: true,
+                    text: 'Frecvența pe grupe de vârstă',
+                    fontSize: 18
+				},
+				tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
+				scales: {
+					xAxes: [{
+						display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Interval Vârstă'
+						}
+					}],
+					yAxes: [{
+						//display: true,
+						scaleLabel: {
+							display: true,
+							labelString: 'Frecvența'
+						}
+					}]
+				}
+			}
+		};
+       
        var configDailyCases = {
 			type: 'line',
 			data: {
