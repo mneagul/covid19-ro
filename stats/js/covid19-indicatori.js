@@ -11,7 +11,8 @@ $.getJSON({
       indicator_data = {
         'label': indicator_keys[indicator],
         'data': [],
-        'borderWidth': 1
+        'borderWidth': 1,
+        'fill': false
       };
       indicator_values = _data[indicator];
       for (i=0; i<indicator_values.columns.length; i++) {
