@@ -34,8 +34,112 @@ $.getJSON({
     _options = polutionConfig.options;
 
     annotations = [
-
-    ]
+      {
+            drawTime: "afterDatasetsDraw",
+            id: "vline1",
+            type: "line",
+            mode: "vertical",
+            scaleID: 'x-axis-0',
+            value: "2020-02-25",
+            borderColor: "black",
+            borderWidth: 5,
+            label: {
+              backgroundColor: "red",
+              content: "Carantina pt Hubei, Lombardia, Veneto",
+              enabled: false
+            }
+      },
+      {
+            drawTime: "afterDatasetsDraw",
+            id: "vline2",
+            type: "line",
+            mode: "vertical",
+            scaleID: 'x-axis-0',
+            value: "2020-03-02",
+            borderColor: "black",
+            borderWidth: 5,
+            label: {
+              backgroundColor: "red",
+              content: "Izolare la domiciliu pt China, Coreea, Iran, Italia de nord",
+              enabled: false
+            }
+      },
+      {
+            drawTime: "afterDatasetsDraw",
+            id: "vline3",
+            type: "line",
+            mode: "vertical",
+            scaleID: 'x-axis-0',
+            value: "2020-03-08",
+            borderColor: "black",
+            borderWidth: 5,
+            label: {
+              backgroundColor: "red",
+              content: "Interzicere a adunarilor de peste 1000 oameni",
+              enabled: false
+            }
+      },
+      {
+            drawTime: "afterDatasetsDraw",
+            id: "vline4",
+            type: "line",
+            mode: "vertical",
+            scaleID: 'x-axis-0',
+            value: "2020-03-09",
+            borderColor: "black",
+            borderWidth: 5,
+            label: {
+              backgroundColor: "red",
+              content: "Interzicere a adunarilor de peste 1000 oameni",
+              enabled: false
+            }
+      },
+      {
+            drawTime: "afterDatasetsDraw",
+            id: "vline5",
+            type: "line",
+            mode: "vertical",
+            scaleID: 'x-axis-0',
+            value: "2020-03-10",
+            borderColor: "black",
+            borderWidth: 5,
+            label: {
+              backgroundColor: "red",
+              content: "Suspendare a transportului public rutier si feroviar din si spre Italia",
+              enabled: false
+            }
+      },
+      {
+            drawTime: "afterDatasetsDraw",
+            id: "vline6",
+            type: "line",
+            mode: "vertical",
+            scaleID: 'x-axis-0',
+            value: "2020-03-11",
+            borderColor: "black",
+            borderWidth: 5,
+            label: {
+              backgroundColor: "red",
+              content: "Inchiderea scolilor",
+              enabled: false
+            }
+      },
+      {
+            drawTime: "afterDatasetsDraw",
+            id: "vline7",
+            type: "line",
+            mode: "vertical",
+            scaleID: 'x-axis-0',
+            value: "2020-03-14",
+            borderColor: "black",
+            borderWidth: 5,
+            label: {
+              backgroundColor: "red",
+              content: "Anuntare Decretare stare de urgenta",
+              enabled: false
+            }
+      },
+    ];
     _options['annotation'] = {
       drawTime: 'afterDatasetsDraw',
       annotations: annotations
